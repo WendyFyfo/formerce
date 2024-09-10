@@ -37,6 +37,8 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
 
     5. Membuat sebuah fungsi pada views.py yang mengembalikan sebuah template HTML untuk menampilkan nama aplikasi serta nama dan kelas saya.
 
+    ***views.py***
+
     ```
     from django.shortcuts import render
 
@@ -45,12 +47,18 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
             'project_name': 'Formerce',
             'name' : 'Muhammad Wendy Fyfo Anggara',
             'kelas': 'PBP E',
-            'product_name': 'AIO Screwdriver',
-            'price': 75000,
-            'description': 'An all-in-one screwdriver for all your screwing needs. \n64 kind of screw bits included with the products',
         }
 
         return render(request, "main.html", context)
+    ```
+
+    ***main.html***
+
+    ```
+    <!DOCTYPE html>
+
+    <h1>{{ project_name }}</h1>
+    <p>{{ name }} ------- {{ kelas }}</p>
     ```
     
     6. Membuat routing pada urls.py pada aplikasi main untuk memetakan fungsi yang telah dibuat pada views.py
