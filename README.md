@@ -68,7 +68,6 @@ A. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara ste
  
 B. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
-```markdown
 ```mermaid
 flowchart TD
     |HTTP Requests| -->|Send Requests| A[urls.py]
