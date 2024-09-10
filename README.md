@@ -71,5 +71,6 @@ B. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django bese
 ```markdown
 ```mermaid
 sequenceDiagram;
-    HTTP Request->>URLs;
+    Participant A as HTTP Request
+    A->>URLs
 ```
