@@ -70,7 +70,9 @@ B. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django bese
 
 ```markdown
 ```mermaid
-sequenceDiagram;
-    Participant A as HTTP Request
-    A->>URLs
+flowchart TD
+    |HTTP Requests| -->|Send Requests| A[urls.py]
+    B[views.py] <--> |read/write data|C[models.py]
+    D[Template (.html file)] --> B
+    B --> |HTTP Response (HTML)|
 ```
