@@ -70,8 +70,9 @@ B. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django bese
 
 ```mermaid
 flowchart TD
-    |HTTP Requests| -->|Send Requests| A[urls.py]
-    B[views.py] <--> |read/write data|C[models.py]
+    E[HTTP Requests] -->|Send Requests| A[urls.py]
+    A --> |Forward request to appropriate view| B[views.py]
+    B <--> |read/write data| C[models.py]
     D[Template (.html file)] --> B
-    B --> |HTTP Response (HTML)|
+    B -->|Return a Response| F[HTTP Response (HTML)]
 ```
