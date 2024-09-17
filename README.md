@@ -1,7 +1,7 @@
 # FORMERCE
 
 ## URLs 
-- Visit [Formerce](https://muhammad-wendy-formerce.pbp.cs.ui.ac.id/)
+- Visit [Formerce](http://muhammad-wendy-formerce.pbp.cs.ui.ac.id/)
 - Tugas
     - [Tugas 3](#pertanyaan-dan-jawaban-tugas-3)
     - [Tugas 2](#pertanyaan-dan-jawaban-tugas-2)
