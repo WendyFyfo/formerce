@@ -2,15 +2,45 @@
 
 {% extends 'base.html' %}
 {% block content %}
-<h1>{{ project_name }}</h1>
-<p>{{ name }} ----- {{ class }}</p>
+<head>
+  <title>formerce</title>
+  <meta charset="UTF-8">
+  <style>
+    h1 {
+      text-align: center;
+      background-color: rgba(211, 179, 0, 0.648);
+    }
+    #author {
+      text-align: center;
+    }
+    table, th, td {
+      background-color: antiquewhite;
+      border: 1px solid;
+    }
+    #product_desc{
+      text-align: justify;
+    }
+    #product_name{
+      text-align: center;
+    }
+    .center{
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <h1><u>{{ project_name }}</u></h1>
+  <p id="author">{{ name }} ----- {{ class }}</p>
 
 <h3>Products:</h3>
 
 {% if not product_entries %}
 <p>Belum ada product yang terdaftar.</p>
 {% else %}
-<table>
+<table class="center">
   <tr>
     <th>Product Name</th>
     <th>Price</th>
@@ -19,9 +49,9 @@
 
   {% for product_entry in product_entries %}
   <tr>
-    <td>{{product_entry.name}}</td>
-    <td>{{product_entry.price}}</td>
-    <td>{{product_entry.description}}</td>
+    <td id="product_name">{{product_entry.name}}</td>
+    <td>Rp{{product_entry.price}}</td>
+    <td id="product_desc">{{product_entry.description}}</td>
   </tr>
   {% endfor %}
 </table>
@@ -32,4 +62,6 @@
 <a href="{% url 'main:create_product_entry' %}">
   <button>Add New Product</button>
 </a>
+
+</body>
 {% endblock content %}
