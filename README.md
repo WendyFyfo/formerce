@@ -272,6 +272,13 @@ def create_product_entry(request):
 ...
 ```
 
+10. Membutkan 2 akun dummy dengan masing-masing 3 product di lokal
+- 'dummy1'
+![dummy1](assets/dummy_accounts/dummy1.png)
+
+- 'dummy2'
+![dummy2](assets/dummy_accounts/dummy2.png) 
+
 ## Pertanyaan dan Jawaban Tugas 3
 A. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 > Data delivery butuh diimplementasikan karena kita perlu mengirimkan data dari satu stack ke stack lainnya.
