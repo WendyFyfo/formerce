@@ -35,33 +35,39 @@
   <h1><u>{{ project_name }}</u></h1>
   <p id="author">{{ name }} ----- {{ class }}</p>
 
-<h3>Products:</h3>
+  <h3>Products:</h3>
 
-{% if not product_entries %}
-<p>Belum ada product yang terdaftar.</p>
-{% else %}
-<table class="center">
-  <tr>
-    <th>Product Name</th>
-    <th>Price</th>
-    <th>Description</th>
-  </tr>
+  {% if not product_entries %}
+  <p>Belum ada product yang terdaftar.</p>
+  {% else %}
+  <table class="center">
+    <tr>
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>Description</th>
+    </tr>
 
-  {% for product_entry in product_entries %}
-  <tr>
-    <td id="product_name">{{product_entry.name}}</td>
-    <td>Rp{{product_entry.price}}</td>
-    <td id="product_desc">{{product_entry.description}}</td>
-  </tr>
-  {% endfor %}
-</table>
-{% endif %}
+    {% for product_entry in product_entries %}
+    <tr>
+      <td id="product_name">{{product_entry.name}}</td>
+      <td>Rp{{product_entry.price}}</td>
+      <td id="product_desc">{{product_entry.description}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
 
-<br />
+  <br />
 
-<a href="{% url 'main:create_product_entry' %}">
-  <button>Add New Product</button>
-</a>
+  <a href="{% url 'main:create_product_entry' %}">
+    <button>Add New Product</button>
+  </a>
+
+  <a href="{% url 'main:logout' %}">
+    <button>Logout</button>
+  </a>
+
+  <h5>Sesi terakhir login: {{ last_login }}</h5>
 
 </body>
 {% endblock content %}
