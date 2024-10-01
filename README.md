@@ -3,9 +3,180 @@
 ## URLs 
 - Visit [Formerce](http://muhammad-wendy-formerce.pbp.cs.ui.ac.id/)
 - Tugas
+    - [Tugas 5](#pertanyaan-dan-jawaban-tugas-5)
     - [Tugas 4](#pertanyaan-dan-jawaban-tugas-4)
     - [Tugas 3](#pertanyaan-dan-jawaban-tugas-3)
     - [Tugas 2](#pertanyaan-dan-jawaban-tugas-2)
+
+## Pertanyaan dan Jawaban Tugas 5
+A.  Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+> Sesuai namanya, prioritas CSS selector adalah *cascade*. Artinya turun dari selector yang paling luas atau umum ke selector yang lebih spesifik. Dengan urutan prioritas sebagai berikut
+  - inline (style diterapkan langsung pada elemen)
+  - ID selector 
+  - Class, attribute, dan pseudo-class selectors
+  - Element dan pseudo-element selectors
+
+B. Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+> *Responsive design* penting dalam pengembangan aplikasi web karena web tersebut dapat diakses dari berbagai macam perangkat dengban ukuran layar yang berbeda, sehingga tampilan web tersebut harus responsif dengan perangkat yang digunakan gar tetap menampilkan tampilan web yang bagus.
+Contoh Web Responsif:
+- youtube.com
+- scele.cs.ui.ac.id
+
+>Contoh web tidak responsif
+- forum.phish.net
+- https://oldschool.runescape.com/
+
+C. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+- Margin:  Jarak di luar elemen, memisahkan elemen dengan elemen lainnya.
+- Border: Garis di sekitar elemen, antara margin dan padding.
+- Padding: Jarak di dalam elemen, antara konten dan border.
+> Contoh implementasi
+```css
+.box {
+  padding: 10px;          /* Jarak konten dalam elemen  dengan border*/
+  border: 2px solid black; /* Garis di sekitar elemen */
+  margin: 20px;           /* Jarak elemen dengan elemen lain */
+}
+```
+> selain itu ketiga komponen tadi juga dapat dikonfigurasi hanya untuk salah satu sisi elemen.
+```css
+margin-top: 10px; 
+margin-right: 5px;
+border-left: 2px solid black; /
+border-bottom: 3px dashed red; 
+padding-top: 20px; 
+padding-left: 15px; 
+```
+
+D.  Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+> Flexbox dan grid adalah dua sistem tata letak pada CSS. Flexbox digunakan untuk menata letak elemen secara satu dimensi, yaitu horizontal atau vertikal, sedangkan sistem grid digunakan untuk penataan letak elemen secara dua dimensi dengan baris dan kolom.
+
+E.  Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+  1. Membuat fungsi edit dan hapus product pada `views.py`.
+```python
+from django.shortcuts import .., reverse
+from django.http import .., HttpResponseRedirect
+...
+def edit_product(request, id):
+    product = ProductEntry.objects.get(pk=id)
+
+    form = ProductEntryForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+    
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
+
+def delete_product(request, id):
+    product = ProductEntry.objects.get(pk=id)
+    product.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
+```
+  2. Menambahkan path url edit_product ke `main/urls.py` 
+```python
+...
+  path('edit-product/<uuid:id>', edit_product, name='edit_product'),
+  path('delete/<uuid:id>', delete_product, name='delete_product'),
+...
+```
+  3. Menambahkan potongan kode ke `main.html`.
+`main.html`
+```html
+...
+<tr>
+    ...
+    <td>
+        <a href="{% url 'main:edit_product' product_entry.pk %}">
+            <button>
+                Edit
+            </button>
+        </a>
+    </td>
+    <td>
+        <a href="{% url 'main:delete_product' product_entry.pk %}">
+            <button>
+                Delete
+            </button>
+        </a>
+    </td>
+</tr>
+...
+```
+  4. Membuat  berkas baru `edit_product.html` dan `delete_product.html` pada `main/templates`
+`edit_product.html`
+```html
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Edit Product</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Edit Product"/>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}
+```
+  5. Membuat `navbar_.html` pada `templates/` lalu menautkannya pada `main.html`, `create_mood.html`, dan `edit_product.html`
+```html
+{% extends 'base.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+...
+{% endblock content%}
+```
+  6. Menambahkan tailwind dengan menambahkan potongan kode pada `base.html` 
+```html
+<head>
+{% block meta %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock meta %}
+<script src="https://cdn.tailwindcss.com">
+</script>
+</head>
+```
+  7. Membuat folder `/static/css` dan membuat file `global.css`
+  8. Menghubungkan `global.css` dan script Tailwind ke `base.html`
+```html
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block meta %} {% endblock meta %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}"/>
+  </head>
+  <body>
+    {% block content %} {% endblock content %}
+  </body>
+</html>
+```
+
+ 9.Menambahkan potongan kode pada `main.html yang akan menampilkan tampilan alternatif bila tidak ada product yang terdaftar
+```html
+...
+  {% if not Product_entries %}
+      <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+          <img src="{% static 'image/no-product.png' %}" alt="Cat in a box" class="w-32 h-32 mb-4"/>
+          <p class="text-center text-gray-600 mt-4">Belum ada data product pada Formerce.</p>
+      </div>
+...
+```
+  10. Style tampilan product dengan menggunakan card. Dengan membuat `card_product.html` pada `main/templates` yang memiliki tombol edit dan delete.
+
+
 
 ## Pertanyaan dan Jawaban Tugas 4
 A. Apa perbedaan antara `HttpResponseRedirect() dan `redirect()` ?
