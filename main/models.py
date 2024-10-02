@@ -8,4 +8,4 @@ class ProductEntry(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField()
     description = models.TextField()
-    image = models.ImageField(upload_to='product_images/',blank=False, null=False, default="media/product_images/image-not-found.png")
+    image = models.ImageField(upload_to='product_images/',blank=False, null=False, default="product_images/image-not-found.png")

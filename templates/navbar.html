@@ -1,9 +1,12 @@
-<nav class="bg-blue-600 shadow-lg fixed top-0 left-0 z-40 w-screen"></nav>
+<nav class="bg-yellow-600 shadow-lg fixed top-0 left-0 z-40 w-screen"></nav>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-end h-16">
-        <div class="hidden md:flex items-center">
+      <div class="flex items-center justify-between h-16 flex-wrap" >
+        <div class="flex items-center">
+          <a href="{% url 'main:show_main' %}" class="text-white font-bold py-2 px-4">Home</a>
+        </div>
+        <div class="hidden md:flex justify-end items-center ml-auto">
           {% if user.is_authenticated %}
-            <span class="text-gray-700 mr-4">Welcome, {{ user.username }}</span>
+            <span class="text-black-700 mr-4 font-bold">{{ user.username }}</span>
             <a href="{% url 'main:logout' %}" class="text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
               Logout
             </a>
@@ -29,7 +32,7 @@
     <div class="mobile-menu hidden md:hidden  px-4 w-full md:max-w-full">
       <div class="pt-2 pb-3 space-y-1 mx-auto">
         {% if user.is_authenticated %}
-          <span class="block text-gray-300 px-3 py-2">Welcome, {{ user.username }}</span>
+          <span class="block text-black px-3 py-2 font-bold">{{ user.username }}</span>
           <a href="{% url 'main:logout' %}" class="block text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
             Logout
           </a>
