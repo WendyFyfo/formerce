@@ -26,13 +26,15 @@ def show_main(request):
     return render(request, "main.html", context)
 
 def create_product_entry(request):
-    form = ProductEntryForm(request.POST or None)
-
-    if form.is_valid() and request.method == "POST":
-        product_entry = form.save(commit=False)
-        product_entry.user = request.user
-        product_entry.save()
-        return redirect('main:show_main')
+    if request.method == "POST":
+        form = ProductEntryForm(request.POST, request.FILES)
+        if form.is_valid():
+            product_entry = form.save(commit=False)
+            product_entry.user = request.user
+            product_entry.save()
+            return redirect('main:show_main')
+    else:
+        form = ProductEntryForm()
 
     context = {'form': form}
     return render(request, "create_product_entry.html", context)

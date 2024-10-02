@@ -7,36 +7,26 @@
 {% block content %}
 {% include 'header.html' %}
 {% include 'navbar.html' %}
-<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-gray-100 flex flex-col">
-  <div class="p-2 mb-6 relative">
-    <div class="w-full px-6  absolute top-[44px] left-0 z-20 hidden md:flex">
-      <div class="w-full min-h-4 bg-indigo-700">
-      </div>
-    </div>
-    <div class="h-full w-full py-6  absolute top-0 left-0 z-20 md:hidden flex ">
-      <div class="h-full min-w-4 bg-indigo-700 mx-auto">
-      </div>
-    </div>
-</div>
+<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-6 min-h-screen bg-gray-100 flex flex-col">
     <div class="px-3 mb-4">
-      <div class="flex rounded-md items-center bg-indigo-600 py-2 px-4 w-fit">
+      <div class="flex rounded-md items-start bg-blue-600 py-2 px-4 w-fit">
         <h1 class="text-white text-center">Last Login: {{last_login}}</h1>
       </div>
     </div>
     <div class="flex justify-end mb-6">
-        <a href="{% url 'main:create_product_entry' %}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+        <a href="{% url 'main:create_product_entry' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
             Add New Product Entry
         </a>
     </div>
     
-    {% if not Product_entries %}
+    {% if not product_entries %}
     <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
-        <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+        <img src="{% static 'assets/image/no-product.png' %}" alt="No Product" class="w-32 h-32 mb-4"/>
         <p class="text-center text-gray-600 mt-4">Belum ada data product pada Formerce.</p>
     </div>
     {% else %}
     <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full">
-        {% for product_entry in Product_entries %}
+        {% for product_entry in product_entries %}
             {% include 'card_product.html' with product_entry=product_entry %}
         {% endfor %}
     </div>

@@ -1,9 +1,9 @@
 <nav class="bg-blue-600 shadow-lg fixed top-0 left-0 z-40 w-screen"></nav>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
+      <div class="flex items-center justify-end h-16">
         <div class="hidden md:flex items-center">
           {% if user.is_authenticated %}
-            <span class="text-gray-300 mr-4">Welcome, {{ user.username }}</span>
+            <span class="text-gray-700 mr-4">Welcome, {{ user.username }}</span>
             <a href="{% url 'main:logout' %}" class="text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
               Logout
             </a>
